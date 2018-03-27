@@ -60,7 +60,7 @@ class FileSystem {
       }
 
     bool Remove(char *name) { return Unlink(name) == 0; }
-  //  bool CloseF(int id) {return Close(id);}
+    bool CloseF(int id) {return Close(id);}
 
 };
 

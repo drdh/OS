@@ -71,7 +71,7 @@ class OpenFile {
     void Seek(int position); 		// Set the position from which to 
 					// start reading/writing -- UNIX lseek
 
-    int Read(char *into, int numBytes); // Read/write bytes from the file, 
+    int Read(char *into, int numBytes); // Read/write bytes from the file,
 					// starting at the implicit position.
 					// Return the # actually read/written,
 					// and increment position in file.

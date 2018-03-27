@@ -57,10 +57,12 @@ OpenFileId SysOpen(char *name)
   return (OpenFileId)kernel->fileSystem->Open(name);
 }
 
-void SysClose(int id)
+bool SysClose(int id)
 {
   OpenFile *file=(OpenFile *)id;
-  file->~OpenFile();
+  if((file->~OpenFile()))
+  return 1;
+  else return 0;
 }
 
 

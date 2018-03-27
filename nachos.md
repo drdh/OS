@@ -38,4 +38,5 @@ nachos/NachOS-4.0/code/test $ ../build.linux/nachos -x halt
 ```
 
 
- 
+### lab 1
+-   
