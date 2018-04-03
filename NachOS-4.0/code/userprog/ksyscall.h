@@ -36,6 +36,9 @@ int SysSub(int op1,int op2)
 }
 
 
+
+//fileSystem
+int FileID[12]={0};
 int SysCreate(char *name)
 {
   if(kernel->fileSystem->Create(name))

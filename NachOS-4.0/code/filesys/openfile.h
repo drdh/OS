@@ -47,6 +47,7 @@ class OpenFile {
 		return numRead;
     		}
     int Write(char *from, int numBytes) {
+		int currentOffset=Length();
 		int numWritten = WriteAt(from, numBytes, currentOffset); 
 		currentOffset += numWritten;
 		return numWritten;

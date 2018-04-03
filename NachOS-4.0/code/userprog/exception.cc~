@@ -191,7 +191,7 @@ ExceptionHandler(ExceptionType which)
 	}
 	else
 	{
-		kernel->machine->WriteRegister(2,0);
+		kernel->machine->WriteRegister(2,-1);
 		printf("Remove file %s failed\n\n",RemoveName);
 	}
 	
@@ -234,7 +234,7 @@ ExceptionHandler(ExceptionType which)
 	else
 	{
 	  printf("Open file %s failed\n\n",OpenName);
-	  kernel->machine->WriteRegister(2,0);
+	  kernel->machine->WriteRegister(2,-1);
 	}
 	
 	{
@@ -253,6 +253,8 @@ ExceptionHandler(ExceptionType which)
 	{
 	  int CloseId=kernel->machine->ReadRegister(4);
 	  SysClose(CloseId);
+	  printf("close file suceeded\n");
+	  kernel->machine->WriteRegister(2,1);
 	  /*
 	  if(SysClose(CloseId))
 	  {
@@ -309,7 +311,7 @@ ExceptionHandler(ExceptionType which)
 	//  printf("WriteId is %d\n",WriteId);
 	  HasWrite=SysWrite(WriteBuff,WriteSize,WriteId);
 	  kernel->machine->WriteRegister(2,int(HasWrite));
-	  printf("Write file succeeded, %d bytes\n\n",HasWrite);
+	 //printf("Write file succeeded, %d bytes\n\n",HasWrite);
 	  {
 	  kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
 	  kernel->machine->WriteRegister(PCReg, kernel->machine->ReadRegister(PCReg) + 4);

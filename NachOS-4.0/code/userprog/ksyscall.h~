@@ -36,6 +36,9 @@ int SysSub(int op1,int op2)
 }
 
 
+
+//fileSystem
+int FileID[12]={0};
 int SysCreate(char *name)
 {
   if(kernel->fileSystem->Create(name))
@@ -57,12 +60,10 @@ OpenFileId SysOpen(char *name)
   return (OpenFileId)kernel->fileSystem->Open(name);
 }
 
-bool SysClose(int id)
+void SysClose(int id)
 {
   OpenFile *file=(OpenFile *)id;
-  if((file->~OpenFile()))
-  return 1;
-  else return 0;
+  file->~OpenFile();
 }
 
 
