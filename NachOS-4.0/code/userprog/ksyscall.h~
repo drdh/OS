@@ -38,7 +38,8 @@ int SysSub(int op1,int op2)
 
 
 //fileSystem
-int FileID[12]={0};
+int FileID[64]={0};
+int TotalFile=5;
 int SysCreate(char *name)
 {
   if(kernel->fileSystem->Create(name))
@@ -57,19 +58,26 @@ int SysRemove(char *name)
 
 OpenFileId SysOpen(char *name)
 {
-  return (OpenFileId)kernel->fileSystem->Open(name);
+  //return (OpenFileId)kernel->fileSystem->Open(name);
+  int p=(int)kernel->fileSystem->Open(name);
+  if(!p)
+    return 0;
+  TotalFile++;
+  FileID[TotalFile]=p;
+  return (OpenFileId)TotalFile;
 }
 
 void SysClose(int id)
 {
-  OpenFile *file=(OpenFile *)id;
+  
+  OpenFile *file=(OpenFile *)(FileID[id]);
   file->~OpenFile();
 }
 
 
 int SysRead(int buff,int size,int id)
 {
-  OpenFile *file=(OpenFile *)id;
+  OpenFile *file=(OpenFile *)(FileID[id]);
   char temp[size];
   int hasRead=file->Read(temp,size);
   printf("what I read:\n %s\n",temp);
@@ -93,7 +101,7 @@ int SysWrite(int buff,int size,int id)
 	temp[count]=*(char *)&value;
 	count++;
 	}while(count<size);
-    OpenFile *file=(OpenFile *)id;
+    OpenFile *file=(OpenFile *)(FileID[id]);
     int hasWrite=file->Write(temp,size);
     return hasWrite;
 }

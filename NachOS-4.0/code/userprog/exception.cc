@@ -227,7 +227,7 @@ ExceptionHandler(ExceptionType which)
 	OpenId=SysOpen(OpenName);
 	if(OpenId)
 	{
-	  printf("Open file %s succeeded\n\n",OpenName);
+	  printf("Open file %s succeeded,id is %d\n\n",OpenName,OpenId);
 	//  printf("file id is %d \n",OpenId);
 	  kernel->machine->WriteRegister(2,(int)OpenId);
 	}
@@ -253,7 +253,7 @@ ExceptionHandler(ExceptionType which)
 	{
 	  int CloseId=kernel->machine->ReadRegister(4);
 	  SysClose(CloseId);
-	  printf("close file suceeded\n");
+	  printf("close file  %d suceeded\n",CloseId);
 	  kernel->machine->WriteRegister(2,1);
 	  /*
 	  if(SysClose(CloseId))
@@ -288,7 +288,7 @@ ExceptionHandler(ExceptionType which)
 	//  printf("ReadId is %d\n",ReadId);
 	  HasRead=SysRead(ReadBuff,ReadSize,ReadId);
 	  kernel->machine->WriteRegister(2,int(HasRead));
-	  printf("Read file succeeded, %d bytes\n\n",HasRead);
+	  printf("Read file %d succeeded, %d bytes\n\n",ReadId,HasRead);
 	  
 	  {
 	  kernel->machine->WriteRegister(PrevPCReg, kernel->machine->ReadRegister(PCReg));
