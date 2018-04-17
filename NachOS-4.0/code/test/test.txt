@@ -1,1 +1,0 @@
-SysCall Test for Nachos!

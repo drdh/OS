@@ -1,6 +1,0 @@
-#!/bin/sh
-cd build.linux
-make
-cd ../test 
-make
-../build.linux/nachos -x $1
