@@ -49,15 +49,27 @@ void printStr(char *str)
 int main()
 {
     int i;
+    char *var = "parent";
     int childID;
+
+    printStr("\n1. init var = \"");
+    printStr(var);
+    printStr("\"\n");
+
     childID = Fork();
     if (childID == 0)
     {
-        for (i = 0; i < 10000; i++); //do nothing
-        printStr("\n2. i am child.\n");
+        var = "child";
+        printStr("2. i am child. i change var = \"");
+        printStr(var);
+        printStr("\"\n");
     }
     else
     {
-        printStr("\n1. i am parent. i finished before my child\n\n");
+        for (i = 0; i < 30000; i++)
+            ; //do nothing
+        printStr("3. i am parent. my var = \"");
+        printStr(var);
+        printStr("\"\n\n");
     }
 }

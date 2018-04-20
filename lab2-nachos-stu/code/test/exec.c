@@ -27,6 +27,7 @@ int main()
         printStr("\n1. i am child. i am runing 'add'.\n");
         printStr("   ");
         Exec("add");
+        printStr("ERROR: when execute add. child finished\n"); //not reached
     }
     else
     {
@@ -37,6 +38,6 @@ int main()
                 t = i + j;
             }
         }
-        printStr("\n2. i am parent. i finished after my child\n\n");
+        printStr("2. i am parent. i finished after my child\n\n");
     }
 }
