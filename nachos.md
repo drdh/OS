@@ -1,7 +1,9 @@
 # NachOS 
 ### Install
 ```
-$ sudo apt-install build-essential gcc-multilib g++-multilib
+$ sudo apt install build-essential gcc-multilib g++-multilib
+(build.linux/ make clean & make depend
+ test make clean)
 
 $ wget http://mll.csie.ntu.edu.tw/course/os_f08/assignment/nachos_40.tar.gz 
 
