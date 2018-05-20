@@ -183,7 +183,7 @@ int FileHeader::ByteToSector(int offset)
     else
     {
       kernel->synchDisk->ReadSector(indirectSectors[indirectIndex],(char *)sectors);
-      index=(offset - DirectSize - indirectIndex*InDirectSectorSize)/InDirectSectorSize;
+      index=(offset - DirectSize - indirectIndex*InDirectSectorSize)/SectorSize;
       return sectors[index];
     }
     // 洞3:end
