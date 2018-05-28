@@ -115,10 +115,12 @@ void FileHeader::Deallocate(PersistentBitmap *freeMap)
 	int k;
 	for(k=0;k<NumInDirectIndex && doneSec < numSectors; k++)
 	{
+	  ASSERT(freeMap->Test((int)sectors[i]));
 	  freeMap->Clear(sectors[k]);
 	  doneSec++;
 	  sectors[k]=-1;
 	}
+	ASSERT(freeMap->Test((int)indirectSectors[i]));
 	freeMap->Clear(indirectSectors[j]);
 	indirectSectors[j]=-1;
         // 洞2:end
@@ -322,6 +324,9 @@ int FileHeader::expandFile(int numSec, PersistentBitmap *freeMap)
 	  indirectSectors[j]=freeMap->FindAndSet();
 	  kernel->synchDisk->ReadSector(indirectSectors[j], (char *)sectors);
 	  int k;
+	  for(k=0;k<NumInDirectIndex;k++)
+	    sectors[k]=-1;
+	  
 	  for(k=0;k<NumInDirectIndex && doneSec < numSec; k++)
 	  {
 	    sectors[k]=freeMap->FindAndSet();
