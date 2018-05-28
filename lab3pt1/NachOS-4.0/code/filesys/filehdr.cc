@@ -72,6 +72,9 @@ bool FileHeader::Allocate(PersistentBitmap *freeMap, int fileSize)
         //    这个洞要注意边界条件(如doneSec等)
 	indirectSectors[j]=freeMap->FindAndSet();
 	int k;
+	for(k=0;k<NumInDirectIndex;k++)
+	    sectors[k]=-1;
+	
 	for(k=0;k<NumInDirectIndex && doneSec < numSectors; k++)
 	{
 	  sectors[k]=freeMap->FindAndSet();
@@ -118,11 +121,11 @@ void FileHeader::Deallocate(PersistentBitmap *freeMap)
 	  ASSERT(freeMap->Test((int)sectors[i]));
 	  freeMap->Clear(sectors[k]);
 	  doneSec++;
-	  sectors[k]=-1;
+	  //sectors[k]=-1;
 	}
 	ASSERT(freeMap->Test((int)indirectSectors[i]));
 	freeMap->Clear(indirectSectors[j]);
-	indirectSectors[j]=-1;
+	//indirectSectors[j]=-1;
         // 洞2:end
     }
 }
